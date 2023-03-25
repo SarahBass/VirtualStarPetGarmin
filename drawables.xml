@@ -1,0 +1,38 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="venuicon.png" />
+    <bitmap id="phone" filename="phone.png" x = "center" dithering="none"/>
+    <bitmap id="nophone" filename="nophone.png" x = "center" dithering="none"/>
+    <bitmap id="thunder" filename="thunder1.png" x = "center" dithering="none"/>
+    <bitmap id="star" filename="star0.png" x = "center" dithering="none"/>
+     <bitmap id="star1" filename="star1.png" x = "center" dithering="none"/>
+      <bitmap id="star2" filename="star2.png" x = "center" dithering="none"/>
+       <bitmap id="star3" filename="star3.png" x = "center" dithering="none"/>
+        <bitmap id="star4" filename="star4.png" x = "center" dithering="none"/>
+         <bitmap id="star5" filename="star5.png" x = "center" dithering="none"/>
+          <bitmap id="star6" filename="star6.png" x = "center" dithering="none"/>
+           <bitmap id="star7" filename="star7.png" x = "center" dithering="none"/>
+    <bitmap id="eyes" filename="eyes0.png" x = "center" dithering="none"/>
+    <bitmap id="mouth1" filename="mouth0.png" x = "center" dithering="none"/>
+     <bitmap id="eyes1" filename="eyes1.png" x = "center" dithering="none"/>
+    <bitmap id="mouth2" filename="mouth1.png" x = "center" dithering="none"/>
+     <bitmap id="mouth3" filename="mouth2.png" x = "center" dithering="none"/>
+      <bitmap id="mouth4" filename="mouth3.png" x = "center" dithering="none"/>
+<bitmap id="baby" filename="baby.png" x = "center" dithering="none"/>
+<bitmap id="babyboy" filename="baby.png" x = "center" dithering="none"/>
+<bitmap id="egg" filename="egg.png" x = "center" dithering="none"/>
+<bitmap id="goal1" filename="goal1.png" x = "center" dithering="none"/>
+<bitmap id="goal2" filename="goal2.png" x = "center" dithering="none"/>
+<bitmap id="goal3" filename="goal3.png" x = "center" dithering="none"/>
+<bitmap id="goal4" filename="goal4.png" x = "center" dithering="none"/>
+<bitmap id="stardecember" filename="stardecember.png" x = "center" dithering="none"/>
+<bitmap id="stardia" filename="stardia.png" x = "center" dithering="none"/>
+<bitmap id="stareaster" filename="stareaster.png" x = "center" dithering="none"/>
+<bitmap id="starjweish" filename="starjewish.png" x = "center" dithering="none"/>
+<bitmap id="starjuneteenth" filename="starjuneteenth.png" x = "center" dithering="none"/>
+<bitmap id="starjuly4" filename="starjuly4.png" x = "center" dithering="none"/>
+<bitmap id="starmarch" filename="starmarch.png" x = "center" dithering="none"/>
+<bitmap id="starnovember" filename="starnovember.png" x = "center" dithering="none"/>
+<bitmap id="staroctober" filename="staroctober.png" x = "center" dithering="none"/>
+<bitmap id="starpride" filename="starpride.png" x = "center" dithering="none"/>
+<bitmap id="starvalentine" filename="starvalentine.png" x = "center" dithering="none"/>
+</drawables>
