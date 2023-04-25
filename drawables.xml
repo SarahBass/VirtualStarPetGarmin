@@ -1,8 +1,5 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="venuicon.png" />
-    <bitmap id="phone" filename="phone.png" x = "center" dithering="none"/>
-    <bitmap id="nophone" filename="nophone.png" x = "center" dithering="none"/>
-    <bitmap id="thunder" filename="thunder1.png" x = "center" dithering="none"/>
     <bitmap id="star" filename="star0.png" x = "center" dithering="none"/>
      <bitmap id="star1" filename="star1.png" x = "center" dithering="none"/>
       <bitmap id="star2" filename="star2.png" x = "center" dithering="none"/>
@@ -20,10 +17,6 @@
 <bitmap id="baby" filename="baby.png" x = "center" dithering="none"/>
 <bitmap id="babyboy" filename="baby.png" x = "center" dithering="none"/>
 <bitmap id="egg" filename="egg.png" x = "center" dithering="none"/>
-<bitmap id="goal1" filename="goal1.png" x = "center" dithering="none"/>
-<bitmap id="goal2" filename="goal2.png" x = "center" dithering="none"/>
-<bitmap id="goal3" filename="goal3.png" x = "center" dithering="none"/>
-<bitmap id="goal4" filename="goal4.png" x = "center" dithering="none"/>
 <bitmap id="stardecember" filename="stardecember.png" x = "center" dithering="none"/>
 <bitmap id="stardia" filename="stardia.png" x = "center" dithering="none"/>
 <bitmap id="stareaster" filename="stareaster.png" x = "center" dithering="none"/>
