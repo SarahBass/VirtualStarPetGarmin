@@ -19,11 +19,11 @@ class VirtualStarPetView extends WatchUi.WatchFace {
    
     //Need Activity and Activity Monitor for steps, calories, heart
     var sensorIter = getIterator();
-    var venus2X = LAYOUT_HALIGN_CENTER;
-    var venus2Y = 10;
-    var venumovey = 13;
-    var phone;
-    var nophone;
+    var venus2X = LAYOUT_HALIGN_RIGHT;
+    var venus2Y = LAYOUT_VALIGN_CENTER;
+    var venumovey =  116;
+    //Somehow get venumovey to move up 3 pixels    
+    
       var star;
       var specialstar;
       var baby;
@@ -44,6 +44,8 @@ class VirtualStarPetView extends WatchUi.WatchFace {
 
         WatchFace.initialize();
         View.initialize();
+
+        
         
 var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
 var fulldateString = Lang.format(
@@ -63,16 +65,7 @@ var dayString = Lang.format(
 [
 today.day_of_week
 ]);
-phone = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.phone,
-            :locX=> LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
-nophone = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.nophone,
-            :locX=> LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
+
         eyes = new WatchUi.Bitmap({
             :rezId=>Rez.Drawables.eyes,
             :locX=> venus2X,
@@ -124,27 +117,7 @@ nophone = new WatchUi.Bitmap({
              :locX=> venus2X,
             :locY=> venus2Y
         });
-         goal1 = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.goal1,
-             :locX=> LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
-                 goal2 = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.goal2,
-             :locX=>LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
-                 goal3 = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.goal3,
-             :locX=> LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
-                 goal4 = new WatchUi.Bitmap({
-            :rezId=>Rez.Drawables.goal4,
-             :locX=> LAYOUT_HALIGN_CENTER,
-            :locY=> 0
-        });
-
+         
 
         switch(fulldateString){
            case "Dec 25":  
@@ -390,7 +363,7 @@ var dateString = Lang.format(
 
 
 // get ActivityMonitor info
-var profile = UserProfile.getProfile();
+
 var mySettings = System.getDeviceSettings();
 var myStats = System.getSystemStats();
 var phonestatus = mySettings.phoneConnected;
@@ -405,35 +378,35 @@ if (seconds%2 == 0){if (sensorIter != null) {
  }else { heart = "";}}else {heart = "";}
 //System.println("You have taken: " + steps +
 //               " steps and burned: " + calories + " calories!");
-
 //System.println(myStats.totalMemory);
 //System.println(myStats.usedMemory);
 //System.println(myStats.freeMemory);
-  // Update the view
-        var view = View.findDrawableById("TimeLabel") as Text;
-        var view2 = View.findDrawableById("DateLabel") as Text;
-        var view3 = View.findDrawableById("batteryLabel") as Text;
-        var view4 = View.findDrawableById("heartLabel") as Text;
-        var view5 = View.findDrawableById("stepsLabel") as Text;
-        var view6 = View.findDrawableById("caloriesLabel") as Text;
-        view.setText(timeString);
-        view2.setText(dateString);
-                if (myStats.charging == true){view3.setText("CHARGE");}
+        // Update the view of text
+        var timeText = View.findDrawableById("TimeLabel") as Text;
+        var dateText = View.findDrawableById("DateLabel") as Text;
+        var batteryText = View.findDrawableById("batteryLabel") as Text;
+        var heartText = View.findDrawableById("heartLabel") as Text;
+        var stepText = View.findDrawableById("stepsLabel") as Text;
+        var calorieText = View.findDrawableById("caloriesLabel") as Text;
+        var horoscopeText = View.findDrawableById("horoscopeLabel") as Text;
+        //set text location based on width and height of device
+       // batteryText.locY = (((System.getDeviceSettings().screenHeight)/3));
+        //set text message
+        timeText.setText(timeString);
+        dateText.setText(dateString);
+                if (myStats.charging == true){batteryText.setText("CHARGE");}
         else{
-            if (minutes%2 == 0){ view3.setText(" "+battery + "%");}
-            else{view3.setText("DAYS:"+ batterylife) ;} } 
-             view3.locX = (((System.getDeviceSettings().screenWidth)/6));
-        view4.locX = (((System.getDeviceSettings().screenWidth)/3));
-        view6.locX = ((((System.getDeviceSettings().screenWidth)*3)/4));
-        view4.setText("-"+heart+"-");
-        view5.setText(""+steps);
-        view6.setText(""+calories);
-       
+            if (minutes%2 == 0){ batteryText.setText(" "+battery + "%");}
+            else{batteryText.setText("DAYS:"+ batterylife) ;} } 
+        heartText.setText("-"+heart+"-");
+        stepText.setText(""+steps);
+        calorieText.setText(""+calories);
+        horoscopeText.setText("# # # #");
         
       
         View.onUpdate(dc);
-        if (phonestatus == true){phone.draw(dc);}
-        else{nophone.draw(dc);}
+        //if (phonestatus == true){phone.draw(dc);}
+        //else{nophone.draw(dc);}
           
          var fakesteps = info.steps; 
         if (fakesteps < goal/4){ egg.draw(dc);  }
@@ -476,8 +449,8 @@ if (seconds%2 == 0){if (sensorIter != null) {
         }else {
             mouth1.locY = venumovey;
             mouth2.locY = venumovey;
-            mouth3.locY = venus2Y;
-            mouth4.locY = venus2Y;
+            mouth3.locY = venumovey;
+            mouth4.locY = venumovey;
             star.locY = venumovey;
             eyes.locY = venumovey;
             eyes2.locY = venumovey;
