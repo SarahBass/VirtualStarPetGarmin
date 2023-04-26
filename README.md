@@ -11,7 +11,7 @@ sunrise & sunset : Done April 25th, but Sunset in CA (maybe due to time change) 
 
 calories, steps, heart rate, battery life: Done
 
-Charging battery, Phone connected
+Charging battery, Phone connected :Done
 
 Weather
 
