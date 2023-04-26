@@ -7,4 +7,8 @@
 <label id="heartLabel" x="center" y="190" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="#EF1EB8" />
 <label id="caloriesLabel" x="center" y="220" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="#00F7EE" />
 <label id="horoscopeLabel" x="center" y="250" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_RIGHT" color="Graphics.COLOR_WHITE" />
-</layout>
+ <label id="sunriseLabel" x="15" y="116" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+<label id="sunsetLabel" x="15" y="227" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+ <label id="tempLabel" x="center" y="270" font="Graphics.FONT_MEDIUM" justification="Graphics.TEXT_JUSTIFY_LEFT" color="Graphics.COLOR_WHITE" />
+<label id="connectLabel" x="center" y="bottom" font="Graphics.FONT_XTINY" justification="Graphics.TEXT_JUSTIFY_CENTER" color="#48FF35" />
+</layout>   
