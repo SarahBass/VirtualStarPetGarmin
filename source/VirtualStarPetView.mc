@@ -373,8 +373,9 @@ var dateString = Lang.format(
 
 var mySettings = System.getDeviceSettings();
 var myStats = System.getSystemStats();
-//var phonestatus = mySettings.phoneConnected;
+var phonestatus = mySettings.phoneConnected;
 var info = ActivityMonitor.getInfo();
+var batterycharging =  myStats.charging;
 var battery = Lang.format("$1$",[((myStats.battery)).format("%2d")]);
 var batterylife = Lang.format("$1$",[(myStats.batteryInDays).format("%2d")]);
 var steps = (info.steps);
@@ -437,6 +438,13 @@ if (!System.getDeviceSettings().is24Hour) {
                 AMPM = "AM";
             }}
 
+var phoneI="";
+var chargeI = "";
+if (phonestatus == true){phoneI = "Y";}
+else{phoneI = "N";}
+if (batterycharging == true){chargeI = "Y";}
+else{chargeI = "N";}
+
 
 //----------PRINT TO SYSTEM CHECKS ------------------------------------
 //System.println(AMPM);
@@ -460,13 +468,13 @@ if (!System.getDeviceSettings().is24Hour) {
         var horoscopeText = View.findDrawableById("horoscopeLabel") as Text;
         var sunriseText = View.findDrawableById("sunriseLabel") as Text;
         var sunsetText = View.findDrawableById("sunsetLabel") as Text;
-        
-   
+        var temperatureText = View.findDrawableById("tempLabel") as Text;
+        var connectText = View.findDrawableById("connectLabel") as Text;
         //set text message
         
         sunriseText.setText(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
         sunsetText.setText(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
-        
+        temperatureText.setText(" # 71°F");
         timeText.setText(timeString+" "+AMPM);
         dateText.setText(dateString);
                 if (myStats.charging == true){batteryText.setText("CHARGE");}
@@ -477,11 +485,11 @@ if (!System.getDeviceSettings().is24Hour) {
         stepText.setText(""+steps);
         calorieText.setText(""+calories);
         horoscopeText.setText("# # # #");
+        connectText.setText(phoneI+" "+chargeI);
         
       
         View.onUpdate(dc);
-        //if (phonestatus == true){phone.draw(dc);}
-        //else{nophone.draw(dc);}
+        
           
          var fakesteps = info.steps; 
         if (fakesteps < goal/4){ egg.draw(dc);  }
