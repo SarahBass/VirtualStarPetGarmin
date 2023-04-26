@@ -27,8 +27,10 @@ class VirtualStarPetView extends WatchUi.WatchFace {
     var venus2X = LAYOUT_HALIGN_RIGHT;
     var venus2Y = LAYOUT_VALIGN_CENTER;
     var venus2XL = 20;
+    var venus2XM = 35;
     var venumovey =  116;
-  
+    var venus2YR = 248;
+    var venus2YS = 78;
     //Somehow get venumovey to move up 3 pixels    
     
       var star;
@@ -47,6 +49,8 @@ class VirtualStarPetView extends WatchUi.WatchFace {
       var mouth3;
       var mouth4;
       var moon1;
+      var risepic;
+      var setpic;
     function initialize() {
     
 
@@ -121,6 +125,17 @@ today.day_of_week
              :locX=> venus2X,
             :locY=> venus2Y
         });
+            risepic = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.sunrise,
+             :locX=> venus2XM,
+            :locY=> venus2YS
+        });
+            setpic = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.sunset,
+             :locX=> venus2XM,
+            :locY=> venus2YR
+        });
+
   // 0 => New Moon
   // 1 => Waxing Crescent Moon
   // 2 => Quarter Moon
@@ -573,7 +588,7 @@ var monthZodiac = getHoroscope(4, 25);
         
         sunriseText.setText(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
         sunsetText.setText(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
-        temperatureText.setText(cond +" "+ TEMP + "°" + FC);
+        temperatureText.setText("  "+cond +" "+ TEMP + "°" + FC);
         timeText.setText(timeString+" "+AMPM);
         dateText.setText(dateString);
                 if (myStats.charging == true){batteryText.setText("CHARGE");}
@@ -642,7 +657,8 @@ var monthZodiac = getHoroscope(4, 25);
             
         }
 moon1.draw(dc);
-
+risepic.draw(dc);
+setpic.draw(dc);
  }
 
    
