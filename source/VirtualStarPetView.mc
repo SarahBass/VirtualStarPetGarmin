@@ -1,16 +1,24 @@
-/*
-  ___ _             __      __    _      _    
- / __| |_ __ _ _ _  \ \    / /_ _| |_ __| |_  
- \__ \  _/ _` | '_|  \ \/\/ / _` |  _/ _| ' \ 
- |___/\__\__,_|_|     \_/\_/\__,_|\__\__|_||_|
-       
-       File: VirtualStarPetView.mc                                       
-       Contains: Most Important Code 
-       Created for Garmin Venu 2 Series
-       Author : Sarah Bass                                
+/*                                             *
+   _____ __        *       _       __      __       __  
+  / ___// /_____ ______   | |     / /___ _/ /______/ /_  *
+  \__ \/ __/ __ `/ ___/   | | /| / / __ `/ __/ ___/ __ \
+ ___/ / /_/ /_/ / /   *   | |/ |/ / /_/ / /_/ /__/ / / / *
+/____/\__/\__,_/_/        |__/|__/\__,_/\__/\___/_/ /_/ 
+                                                                                                                                                                 
+  /\   File: VirtualStarPetView.mc              *                         
+  \/   Contains: Most Important Code     /\
+       Created for Garmin Venu 2 Series  \/           *
+       Author : Sarah Bass                        
+
 */
 
-
+/*-------------------------------------------------------------
+  _                     _      
+ (_)_ __  _ __  ___ _ _| |_ ___
+ | | '  \| '_ \/ _ \ '_|  _(_-<
+ |_|_|_|_| .__/\___/_|  \__/__/
+         |_|                   
+----------------------------------------------------------------*/
 import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
@@ -31,13 +39,36 @@ using Toybox.ActivityMonitor;
 using Toybox.SensorHistory;
 using Toybox.Position;
 
-
+//--------------------------------------------------//
+/*            
+  Program Outline:
+   Class{ 
+      Initialize Global Variables
+      Initialize Bitmaps : function initialize()
+      Update Scene : function onUpdate()
+      Additional Functions :
+         Chinese Horoscope
+         Moon phase
+         Heart Rate
+         Zodiac Sign
+         Void Garmin Functions 
+    }    
+*/
+//---------------------------------------------------//
 
 class VirtualStarPetView extends WatchUi.WatchFace {
+
+/*
+               _      _    _        
+ __ ____ _ _ _(_)__ _| |__| |___ ___
+ \ V / _` | '_| / _` | '_ \ / -_|_-<
+  \_/\__,_|_| |_\__,_|_.__/_\___/__/
+                                    
+*/
    
     //Need Activity and Activity Monitor for steps, calories, heart
-    //Variables for placement of Bitmaps
     var sensorIter = getIterator();
+    //Variables for placement of Bitmaps
     var venus2X = LAYOUT_HALIGN_RIGHT;
     var venus2Y = LAYOUT_VALIGN_CENTER;
     var venus2XL = 20;
@@ -66,7 +97,13 @@ class VirtualStarPetView extends WatchUi.WatchFace {
       var setpic;
     
     
-    //initialize Bitmaps
+/*
+  _      _ _   _      _ _        
+ (_)_ _ (_) |_(_)__ _| (_)______ 
+ | | ' \| |  _| / _` | | |_ / -_)
+ |_|_||_|_|\__|_\__,_|_|_/__\___|
+                                 
+*/
     function initialize() {
     
 
@@ -457,7 +494,15 @@ today.day_of_week
    All Strings and Images are Drawn and Called here
 */    
     function onUpdate(dc as Dc) as Void {
-        
+
+
+/*
+               _      _    _        
+ __ ____ _ _ _(_)__ _| |__| |___ ___
+ \ V / _` | '_| / _` | '_ \ / -_|_-<
+  \_/\__,_|_| |_\__,_|_.__/_\___/__/
+                                    
+*/
         // Variables for Data-------------------------------------------
        var goal = 5000; 
        var profile = UserProfile.getProfile();
