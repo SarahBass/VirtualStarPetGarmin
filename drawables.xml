@@ -36,4 +36,6 @@
 <bitmap id="wancres" filename="wancres.png" x = "center" dithering="none"/>
 <bitmap id="waxgib" filename="waxgib.png"  x = "center" dithering="none"/>
 <bitmap id="wangib" filename="wangib.png" x = "center" dithering="none"/>
+<bitmap id="sunrise" filename="sunrise.png"  x = "center" dithering="none"/>
+<bitmap id="sunset" filename="sunset.png" x = "center" dithering="none"/>
 </drawables>
