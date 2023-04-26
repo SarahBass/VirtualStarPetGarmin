@@ -810,7 +810,17 @@ function getChineseYear(year){
  |  \/  |___  ___ _ _   | _ \ |_  __ _ ___ ___ 
  | |\/| / _ \/ _ \ ' \  |  _/ ' \/ _` (_-</ -_)
  |_|  |_\___/\___/_||_| |_| |_||_\__,_/__/\___|
-                                               
+ This is not Totally Accurate Either Sadly
+ It can be improved, but I took the lazy Route 
+ This is based on a Farmers Almanac -
+ Which Moonphases are 3 Days Each instead of Modern 1 Day
+ So it Will show Quarter Moon, Full Moon, and New Moon for 3 Days
+ If you are only Drawing the Moon - Should be Fine
+
+ If you want exact Moon Dates Here Are Github Functions for 2022-2030
+ ((You can use these Javascript function directly in Monkey C- no changes needed))
+ https://github.com/SarahBass/Javascript-Moon-Functions/blob/main/Newmoon.js
+ https://github.com/SarahBass/Javascript-Moon-Functions/blob/main/FullMoon.js
 */
 function getMoonPhase(year, month, day) {
 
@@ -843,8 +853,8 @@ function getMoonPhase(year, month, day) {
       if (b >= 8) {
         b = 0; //0 and 8 are the same so turn 8 into 0
       }
-
-      return b;
+     //Return a Monkey C Number
+      return (b).toNumber();
     }
 /*
   ____        _ _           __  __         _   _    
