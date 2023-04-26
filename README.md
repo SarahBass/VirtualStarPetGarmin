@@ -15,6 +15,6 @@ Charging battery, Phone connected
 
 Weather
 
-Time, Date : Done
+Time, Date : Done AM/PM added Apr 25
 
 Stars that change based on holidays : Done
