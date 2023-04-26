@@ -13,7 +13,7 @@ calories, steps, heart rate, battery life: Done
 
 Charging battery, Phone connected :Done
 
-Weather
+Weather F/C and Temperature : Done 
 
 Time, Date : Done AM/PM added Apr 25
 
