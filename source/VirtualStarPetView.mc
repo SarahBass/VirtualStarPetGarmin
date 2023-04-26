@@ -3,17 +3,22 @@ import Toybox.Graphics;
 import Toybox.Lang;
 import Toybox.System;
 import Toybox.WatchUi;
-using Toybox.Time;
-using Toybox.Time.Gregorian;
-using Toybox.System; 
-using Toybox.UserProfile;
 import Toybox.ActivityMonitor;
 import Toybox.Activity;
 import Toybox.Math;
 import Toybox.Application.Storage;
+import Toybox.Weather;
+import Toybox.Time;
+import Toybox.Position;
+using Toybox.Time;
+using Toybox.Time.Gregorian;
+using Toybox.System; 
+using Toybox.UserProfile;
 using Toybox.ActivityMonitor;
-using Toybox.System;
 using Toybox.SensorHistory;
+using Toybox.Position;
+
+
 
 class VirtualStarPetView extends WatchUi.WatchFace {
    
@@ -22,6 +27,7 @@ class VirtualStarPetView extends WatchUi.WatchFace {
     var venus2X = LAYOUT_HALIGN_RIGHT;
     var venus2Y = LAYOUT_VALIGN_CENTER;
     var venumovey =  116;
+  
     //Somehow get venumovey to move up 3 pixels    
     
       var star;
@@ -362,11 +368,12 @@ var dateString = Lang.format(
 );
 
 
-// get ActivityMonitor info
+
+
 
 var mySettings = System.getDeviceSettings();
 var myStats = System.getSystemStats();
-var phonestatus = mySettings.phoneConnected;
+//var phonestatus = mySettings.phoneConnected;
 var info = ActivityMonitor.getInfo();
 var battery = Lang.format("$1$",[((myStats.battery)).format("%2d")]);
 var batterylife = Lang.format("$1$",[(myStats.batteryInDays).format("%2d")]);
@@ -376,6 +383,36 @@ var heart = "";
 if (seconds%2 == 0){if (sensorIter != null) {
      heart =(sensorIter.next().data);
  }else { heart = "";}}else {heart = "";}
+ 
+
+
+		
+        var timeStamp= new Time.Moment(Time.today().value());
+		var positions = Activity.Info.currentLocation;
+        if (positions == null){
+        positions=new Position.Location(
+    {
+        :latitude => 38.856147,
+        :longitude => -94.800953,
+        :format => :degrees
+    }
+);
+        }
+        
+        var sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
+        //var sunrise = Toybox.Weather.getSunrise(positions, timeStamp);
+		 var sunsetHour = sunset.hour;
+         if (!System.getDeviceSettings().is24Hour) {
+            if (sunset.hour > 12) {
+                sunsetHour = (hours - 12).abs();
+            }
+        } else {
+            if (getApp().getProperty("UseMilitaryFormat")) {
+                timeFormat = "$1$$2$";
+                sunsetHour = sunset.hour.format("%02d");
+            }
+        }
+        System.println(sunsetHour + ":" + sunset.min.format("%02u"));
 //System.println("You have taken: " + steps +
 //               " steps and burned: " + calories + " calories!");
 //System.println(myStats.totalMemory);
@@ -389,9 +426,15 @@ if (seconds%2 == 0){if (sensorIter != null) {
         var stepText = View.findDrawableById("stepsLabel") as Text;
         var calorieText = View.findDrawableById("caloriesLabel") as Text;
         var horoscopeText = View.findDrawableById("horoscopeLabel") as Text;
+        var sunriseText = View.findDrawableById("sunriseLabel") as Text;
+        var sunsetText = View.findDrawableById("sunsetLabel") as Text;
         //set text location based on width and height of device
        // batteryText.locY = (((System.getDeviceSettings().screenHeight)/3));
         //set text message
+        
+        sunriseText.setText("6:10 AM");
+        sunsetText.setText("7:09 PM");
+        
         timeText.setText(timeString);
         dateText.setText(dateString);
                 if (myStats.charging == true){batteryText.setText("CHARGE");}
@@ -470,6 +513,22 @@ if (seconds%2 == 0){if (sensorIter != null) {
     // memory.
     function onHide() as Void {
     }
+
+
+
+
+
+/* SET LOCATION IF NEEDED
+var myLocation = new Position.Location(
+    {
+        :latitude => 38.856147,
+        :longitude => -94.800953,
+        :format => :degrees
+    }
+);
+*/
+
+
 
 
 function getIterator() {
