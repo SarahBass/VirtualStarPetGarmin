@@ -45,6 +45,7 @@ using Toybox.Position;
    Class{ 
       Initialize Global Variables
       Initialize Bitmaps : function initialize()
+      Initialize Layout : function onLayout()
       Update Scene : function onUpdate()
       Additional Functions :
          Chinese Horoscope
