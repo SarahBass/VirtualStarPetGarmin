@@ -388,7 +388,11 @@ if (seconds%2 == 0){if (sensorIter != null) {
  }else { heart = "";}}else {heart = "";}
  
 
-
+var monthString = Lang.format(
+    "$1$",
+[
+today.month
+]);
 		
         var timeStamp= new Time.Moment(Time.today().value());
         
@@ -459,9 +463,11 @@ FC = "C";
 TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
 FC = "F";   
 }
-var horoscopeYear = "";
-var horoscopeBirth ="";
-var monthZodiac = getHoroscope(today);
+var horoscopeYear = getChineseYear(today.year);
+var horoscopeBirth =getChineseYear(birthEntry);
+var monthZodiac = getHoroscope(today.month, today.day);
+
+
 
 
 
@@ -573,78 +579,125 @@ var monthZodiac = getHoroscope(today);
     function onHide() as Void {
     }
 
-function getHoroscope(today) {
-    
-      if (today.month == 0) {
-        if (today.day > 0 || today.day < 19) {
-          return "Cap";
+function getChineseYear(year){
+    var value = ((((year).toNumber())%12).toNumber());
+        switch(value){
+            case 0:
+                return "mon";
+                  //break;
+            case 1:
+                return "roo";
+                //break;  
+            case 2:
+                return "dog";
+                //break;  
+            case 3:
+                return "pig";
+                //break;  
+            case 4:
+                return "rat";
+                //break;  
+            case 5:
+                return "ox";
+                //break;  
+            case 6:
+                return "tig";
+                //break;            
+            case 7:
+                return "rab";
+                //break;
+            case 8:
+                return "dra";
+                //break;
+            case 9:
+                return "sna";
+                //break;
+            case 10:
+                return "hor";
+                //break;
+            case 11:
+                return "goa";
+                //break;                         
+            default:
+            return "dra";
+            }
+    }
+
+
+
+function getHoroscope(month, day) {
+    month = month.toString();
+    day = day.toNumber();
+      if (month == "Jan") {
+        if ((day > 0) && (day < 19)) {
+          return "Capricorn";
         } else {
-          return "Aqu";
+          return "Aquarius";
         }
-      } else if (today.month == 1) {
-        if (today.day > 1 || today.day < 18) {
-          return "Cap";
+      } else if (month == "Feb") {
+        if (day > 1 && day < 18) {
+          return "Capricorn";
         } else {
-          return "Pis";
+          return "Pisces";
         }
-      } else if (today.month == 2) {
-        if (today.day > 1 || today.day < 20) {
-          return "Pis";
+      } else if (month == "Mar") {
+        if (day > 1 && day < 20) {
+          return "Pisces";
         } else {
-          return "Ari";
+          return "Aries";
         }
-      } else if (today.month == 3) {
-        if (today.day > 1 || today.day < 19) {
-          return "Ari";
+      } else if (month == "Apr") {
+        if ((day > 1) && (day < 19)) {
+          return "Aries";
         } else {
-          return "Tau";
+          return "Taurus";
         }
-      } else if (today.month == 4) {
-        return "Tau";
-      } else if (today.month == 5) {
-        if (today.day > 1 || today.day < 20) {
-          return "Gem";
+      } else if (month == "May") {
+        return "Taurus";
+      } else if (month == "Jun") {
+        if (day > 1 && day < 20) {
+          return "Gemini";
         } else {
-          return "Can";
+          return "Cancer";
         }
-      } else if (today.month == 6) {
-        if (today.day > 1 || today.day < 22) {
-          return "Can";
+      } else if (month == "Jul") {
+        if (day > 1 && day < 22) {
+          return "Cancer";
         } else {
           return "Leo";
         }
-      } else if (today.month == 7) {
-        if (today.day > 1 || today.day < 22) {
+      } else if (month == "Aug") {
+        if (day > 1 && day < 22) {
           return "Leo";
         } else {
-          return "Vir";
+          return "Virgo";
         }
-      } else if (today.month == 8) {
-        if (today.day > 1 || today.day < 22) {
-          return "Vir";
+      } else if (month == "Sep") {
+        if (day > 1 && day < 22) {
+          return "Virgo";
         } else {
-          return "Lib";
+          return "Libra";
         }
-      } else if (today.month == 9) {
-        if (today.day > 1 || today.day < 22) {
-          return "Lib";
+      } else if (month == "Oct") {
+        if (day > 1 && day < 22) {
+          return "Libra";
         } else {
-          return "Sco";
+          return "Scorpio";
         }
-      } else if (today.month == 10) {
-        if (today.day > 1 || today.day < 21) {
-          return "Sco";
+      } else if (month == "Nov") {
+        if (day > 1 && day < 21) {
+          return "Scorpio";
         } else {
-          return "Sag";
+          return "Sagittarius";
         }
-      } else if (today.month == 12) {
-        if (today.day > 1 || today.day < 21) {
-          return "Sag";
+      } else if (month == "Dec") {
+        if (day > 1 && day < 21) {
+          return "Sagittarius";
         } else {
-          return "Cap";
+          return "Capricorn";
         }
       } else {
-        return "Ari";
+        return "Aries";
       }
     }
 
