@@ -444,7 +444,19 @@ if (phonestatus == true){phoneI = "Y";}
 else{phoneI = "N";}
 if (batterycharging == true){chargeI = "Y";}
 else{chargeI = "N";}
+var TempMetric = System.getDeviceSettings().temperatureUnits;
 
+var TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
+var FC = "C";
+var cond = Toybox.Weather.getCurrentConditions().condition;
+
+if (TempMetric == System.UNIT_METRIC){
+TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
+FC = "C";
+}else{
+TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
+FC = "F";   
+}
 
 //----------PRINT TO SYSTEM CHECKS ------------------------------------
 //System.println(AMPM);
@@ -474,7 +486,7 @@ else{chargeI = "N";}
         
         sunriseText.setText(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
         sunsetText.setText(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
-        temperatureText.setText(" # 71°F");
+        temperatureText.setText(cond +" "+ TEMP + "°" + FC);
         timeText.setText(timeString+" "+AMPM);
         dateText.setText(dateString);
                 if (myStats.charging == true){batteryText.setText("CHARGE");}
