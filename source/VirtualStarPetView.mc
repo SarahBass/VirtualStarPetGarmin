@@ -61,11 +61,7 @@ var fulldateString = Lang.format(
         today.day,
     ] 
 );
-var monthString = Lang.format(
-    "$1$",
-[
-today.month
-]);
+
 var dayString = Lang.format(
     "$1$",
 [
@@ -388,11 +384,7 @@ if (seconds%2 == 0){if (sensorIter != null) {
  }else { heart = "";}}else {heart = "";}
  
 
-var monthString = Lang.format(
-    "$1$",
-[
-today.month
-]);
+
 		
         var timeStamp= new Time.Moment(Time.today().value());
         
@@ -463,9 +455,17 @@ FC = "C";
 TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
 FC = "F";   
 }
+
+
+var monthString = Lang.format(
+    "$1$",
+[
+today.month
+]);
+
 var horoscopeYear = getChineseYear(today.year);
 var horoscopeBirth =getChineseYear(birthEntry);
-var monthZodiac = getHoroscope(today.month, today.day);
+var monthZodiac = getHoroscope((monthString) , (today.day));
 
 
 
