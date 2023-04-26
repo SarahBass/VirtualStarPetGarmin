@@ -373,6 +373,8 @@ var dateString = Lang.format(
 
 var mySettings = System.getDeviceSettings();
 var myStats = System.getSystemStats();
+var genderEntry = profile.gender;
+var birthEntry =profile.birthYear;
 var phonestatus = mySettings.phoneConnected;
 var info = ActivityMonitor.getInfo();
 var batterycharging =  myStats.charging;
@@ -457,6 +459,11 @@ FC = "C";
 TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
 FC = "F";   
 }
+var horoscopeYear = "";
+var horoscopeBirth ="";
+var monthZodiac = getHoroscope(today);
+
+
 
 //----------PRINT TO SYSTEM CHECKS ------------------------------------
 //System.println(AMPM);
@@ -496,7 +503,7 @@ FC = "F";
         heartText.setText("-"+heart+"-");
         stepText.setText(""+steps);
         calorieText.setText(""+calories);
-        horoscopeText.setText("# # # #");
+        horoscopeText.setText(genderEntry + " "+ horoscopeYear + " "+ horoscopeBirth + " " + monthZodiac);
         connectText.setText(phoneI+" "+chargeI);
         
       
@@ -566,6 +573,80 @@ FC = "F";
     function onHide() as Void {
     }
 
+function getHoroscope(today) {
+    
+      if (today.month == 0) {
+        if (today.day > 0 || today.day < 19) {
+          return "Cap";
+        } else {
+          return "Aqu";
+        }
+      } else if (today.month == 1) {
+        if (today.day > 1 || today.day < 18) {
+          return "Cap";
+        } else {
+          return "Pis";
+        }
+      } else if (today.month == 2) {
+        if (today.day > 1 || today.day < 20) {
+          return "Pis";
+        } else {
+          return "Ari";
+        }
+      } else if (today.month == 3) {
+        if (today.day > 1 || today.day < 19) {
+          return "Ari";
+        } else {
+          return "Tau";
+        }
+      } else if (today.month == 4) {
+        return "Tau";
+      } else if (today.month == 5) {
+        if (today.day > 1 || today.day < 20) {
+          return "Gem";
+        } else {
+          return "Can";
+        }
+      } else if (today.month == 6) {
+        if (today.day > 1 || today.day < 22) {
+          return "Can";
+        } else {
+          return "Leo";
+        }
+      } else if (today.month == 7) {
+        if (today.day > 1 || today.day < 22) {
+          return "Leo";
+        } else {
+          return "Vir";
+        }
+      } else if (today.month == 8) {
+        if (today.day > 1 || today.day < 22) {
+          return "Vir";
+        } else {
+          return "Lib";
+        }
+      } else if (today.month == 9) {
+        if (today.day > 1 || today.day < 22) {
+          return "Lib";
+        } else {
+          return "Sco";
+        }
+      } else if (today.month == 10) {
+        if (today.day > 1 || today.day < 21) {
+          return "Sco";
+        } else {
+          return "Sag";
+        }
+      } else if (today.month == 12) {
+        if (today.day > 1 || today.day < 21) {
+          return "Sag";
+        } else {
+          return "Cap";
+        }
+      } else {
+        return "Ari";
+      }
+    }
 
 function getIterator() {
     // Check device for SensorHistory compatibility
