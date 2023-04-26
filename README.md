@@ -7,7 +7,7 @@ To include custom font and icons.
 
 moon phase, chinese horoscope, zodiac, gender, birth horoscope
 
-sunrise & sunset : Done April 25th
+sunrise & sunset : Done April 25th, but Sunset in CA (maybe due to time change) is 2 hours off.
 
 calories, steps, heart rate, battery life: Done
 
