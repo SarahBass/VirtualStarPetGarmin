@@ -413,7 +413,7 @@ if (seconds%2 == 0){if (sensorIter != null) {
                 sunriseHour = sunrise.hour.format("%02d");
             }
         }
-        System.println(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
+        //System.println(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
 
         var sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
         
@@ -428,7 +428,7 @@ if (seconds%2 == 0){if (sensorIter != null) {
                 sunsetHour = sunset.hour.format("%02d");
             }
         }
-        System.println(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
+        //System.println(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
 //System.println("You have taken: " + steps +
 //               " steps and burned: " + calories + " calories!");
 //System.println(myStats.totalMemory);
@@ -448,8 +448,8 @@ if (seconds%2 == 0){if (sensorIter != null) {
        // batteryText.locY = (((System.getDeviceSettings().screenHeight)/3));
         //set text message
         
-        sunriseText.setText("6:10 AM");
-        sunsetText.setText("7:09 PM");
+        sunriseText.setText(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
+        sunsetText.setText(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
         
         timeText.setText(timeString);
         dateText.setText(dateString);
