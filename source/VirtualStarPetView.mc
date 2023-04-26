@@ -388,19 +388,35 @@ if (seconds%2 == 0){if (sensorIter != null) {
 
 		
         var timeStamp= new Time.Moment(Time.today().value());
+        
+        
 		var positions = Activity.Info.currentLocation;
         if (positions == null){
         positions=new Position.Location(
     {
-        :latitude => 38.856147,
-        :longitude => -94.800953,
+        :latitude => 33.684566,
+        :longitude => -117.826508,
         :format => :degrees
     }
 );
         }
+         var sunrise = Time.Gregorian.info(Toybox.Weather.getSunrise(positions, timeStamp), Time.FORMAT_MEDIUM);
         
+		 var sunriseHour = sunrise.hour;
+         if (!System.getDeviceSettings().is24Hour) {
+            if (sunrise.hour > 12) {
+                sunriseHour = (hours - 12).abs();
+            }
+        } else {
+            if (getApp().getProperty("UseMilitaryFormat")) {
+                timeFormat = "$1$$2$";
+                sunriseHour = sunrise.hour.format("%02d");
+            }
+        }
+        System.println(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
+
         var sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
-        //var sunrise = Toybox.Weather.getSunrise(positions, timeStamp);
+        
 		 var sunsetHour = sunset.hour;
          if (!System.getDeviceSettings().is24Hour) {
             if (sunset.hour > 12) {
@@ -412,7 +428,7 @@ if (seconds%2 == 0){if (sensorIter != null) {
                 sunsetHour = sunset.hour.format("%02d");
             }
         }
-        System.println(sunsetHour + ":" + sunset.min.format("%02u"));
+        System.println(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
 //System.println("You have taken: " + steps +
 //               " steps and burned: " + calories + " calories!");
 //System.println(myStats.totalMemory);
