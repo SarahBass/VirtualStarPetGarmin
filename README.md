@@ -5,7 +5,7 @@ No Backgrounds Version to save energy - Work in progress
 
 To include custom font and icons. 
 
-moon phase, chinese horoscope, zodiac, gender, birth horoscope
+moon phase, chinese horoscope, zodiac, gender, birth horoscope : Everything, but the zodiac doesnt work for some reason.
 
 sunrise & sunset : Done April 25th, but Sunset in CA (maybe due to time change) is 2 hours off.
 
