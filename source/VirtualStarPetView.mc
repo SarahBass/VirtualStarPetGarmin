@@ -1,3 +1,16 @@
+/*
+  ___ _             __      __    _      _    
+ / __| |_ __ _ _ _  \ \    / /_ _| |_ __| |_  
+ \__ \  _/ _` | '_|  \ \/\/ / _` |  _/ _| ' \ 
+ |___/\__\__,_|_|     \_/\_/\__,_|\__\__|_||_|
+       
+       File: VirtualStarPetView.mc                                       
+       Contains: Most Important Code 
+       Created for Garmin Venu 2 Series
+       Author : Sarah Bass                                
+*/
+
+
 import Toybox.Application;
 import Toybox.Graphics;
 import Toybox.Lang;
@@ -23,6 +36,7 @@ using Toybox.Position;
 class VirtualStarPetView extends WatchUi.WatchFace {
    
     //Need Activity and Activity Monitor for steps, calories, heart
+    //Variables for placement of Bitmaps
     var sensorIter = getIterator();
     var venus2X = LAYOUT_HALIGN_RIGHT;
     var venus2Y = LAYOUT_VALIGN_CENTER;
@@ -30,9 +44,8 @@ class VirtualStarPetView extends WatchUi.WatchFace {
     var venus2XM = 35;
     var venumovey =  116;
     var venus2YR = 248;
-    var venus2YS = 78;
-    //Somehow get venumovey to move up 3 pixels    
-    
+    var venus2YS = 78;  
+    //Variable names for Bitmaps
       var star;
       var specialstar;
       var baby;
@@ -51,6 +64,9 @@ class VirtualStarPetView extends WatchUi.WatchFace {
       var moon1;
       var risepic;
       var setpic;
+    
+    
+    //initialize Bitmaps
     function initialize() {
     
 
@@ -58,7 +74,7 @@ class VirtualStarPetView extends WatchUi.WatchFace {
         View.initialize();
 
         
-        
+//Variables needed to initialize the correct Bitmaps        
 var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
 var fulldateString = Lang.format(
     "$1$ $2$",
@@ -73,6 +89,15 @@ var dayString = Lang.format(
 [
 today.day_of_week
 ]);
+/*
+  _    _ _                   
+ | |__(_) |_ _ __  __ _ _ __ 
+ | '_ \ |  _| '  \/ _` | '_ \
+ |_.__/_|\__|_|_|_\__,_| .__/
+                       |_|   
+
+*/
+
 
         eyes = new WatchUi.Bitmap({
             :rezId=>Rez.Drawables.eyes,
@@ -145,9 +170,10 @@ today.day_of_week
   // 6 => Last Quarter Moon
   // 7 => Waning Crescent Moon
   var moonnumber = getMoonPhase(2023, 3, 25);
+  // var moonnumber = getMoonPhase(today.year, today.month, today.day);
 
- // var moonnumber = getMoonPhase(today.year, today.month, today.day);
-
+  
+  //Moon Bitmpas
   switch (moonnumber){
            case 0:  
             moon1 = new WatchUi.Bitmap({
@@ -210,6 +236,9 @@ today.day_of_week
             :locX=> venus2XL,
             :locY=> venus2Y
         });}
+
+
+        //Star Pet Bitmaps
         switch(fulldateString){
            case "Dec 25":  
             specialstar = new WatchUi.Bitmap({
@@ -406,24 +435,31 @@ today.day_of_week
 
     }
 
-    // Load your resources here
+    // Load your string resources here from Layout
     function onLayout(dc as Dc) as Void {
         setLayout(Rez.Layouts.WatchFace(dc));
         
     }
 
-
+    //Foreground View as blank for energy save
+    //and to not burn screen
     function onShow() as Void {
+        
+
     }
+/*
+                _      _             _            
+  _  _ _ __  __| |__ _| |_ ___  __ _(_)_____ __ __
+ | || | '_ \/ _` / _` |  _/ -_) \ V / / -_) V  V /
+  \_,_| .__/\__,_\__,_|\__\___|  \_/|_\___|\_/\_/ 
+      |_|                                         
 
-
-
-
-    // Update the view
+   All Strings and Images are Drawn and Called here
+*/    
     function onUpdate(dc as Dc) as Void {
         
-        // Get the current time and format it correctly
-        var goal = 5000; 
+        // Variables for Data-------------------------------------------
+       var goal = 5000; 
        var profile = UserProfile.getProfile();
         var timeFormat = "$1$:$2$";
         var clockTime = System.getClockTime();
@@ -440,9 +476,9 @@ today.day_of_week
                 hours = hours.format("%02d");
             }
         }
-var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
-var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-var dateString = Lang.format(
+    var timeString = Lang.format(timeFormat, [hours, clockTime.min.format("%02d")]);
+    var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+    var dateString = Lang.format(
     "$1$ , $2$ $3$ $4$",
     [
         today.day_of_week,
@@ -450,35 +486,26 @@ var dateString = Lang.format(
         today.day,
         today.year
     ] 
-);
-
-
-
-
-
-var mySettings = System.getDeviceSettings();
-var myStats = System.getSystemStats();
-var genderEntry = profile.gender;
-var birthEntry =profile.birthYear;
-var phonestatus = mySettings.phoneConnected;
-var info = ActivityMonitor.getInfo();
-var batterycharging =  myStats.charging;
-var battery = Lang.format("$1$",[((myStats.battery)).format("%2d")]);
-var batterylife = Lang.format("$1$",[(myStats.batteryInDays).format("%2d")]);
-var steps = (info.steps);
-var calories = info.calories;
-var heart = "";
-if (seconds%2 == 0){if (sensorIter != null) {
+    );
+    var mySettings = System.getDeviceSettings();
+    var myStats = System.getSystemStats();
+    var genderEntry = profile.gender;
+    var birthEntry =profile.birthYear;
+    var phonestatus = mySettings.phoneConnected;
+    var info = ActivityMonitor.getInfo();
+    var batterycharging =  myStats.charging;
+    var battery = Lang.format("$1$",[((myStats.battery)).format("%2d")]);
+    var batterylife = Lang.format("$1$",[(myStats.batteryInDays).format("%2d")]);
+    var steps = (info.steps);
+    var calories = info.calories;
+    var heart = "";
+    if (seconds%2 == 0){if (sensorIter != null) {
      heart =(sensorIter.next().data);
- }else { heart = "";}}else {heart = "";}
- 
-
-
-		
-        var timeStamp= new Time.Moment(Time.today().value());
-        
-        
-		var positions = Activity.Info.currentLocation;
+    }else { heart = "";}}else {heart = "";}
+ 	
+    var timeStamp= new Time.Moment(Time.today().value());
+         
+	var positions = Activity.Info.currentLocation;
         if (positions == null){
         positions=new Position.Location( 
     {
@@ -486,11 +513,11 @@ if (seconds%2 == 0){if (sensorIter != null) {
         :longitude => -117.826508,
         :format => :degrees
     }
-);
-        }
-         var sunrise = Time.Gregorian.info(Toybox.Weather.getSunrise(positions, timeStamp), Time.FORMAT_MEDIUM);
+    );
+    }
+    var sunrise = Time.Gregorian.info(Toybox.Weather.getSunrise(positions, timeStamp), Time.FORMAT_MEDIUM);
         
-		 var sunriseHour = sunrise.hour;
+	var sunriseHour = sunrise.hour;
          if (!System.getDeviceSettings().is24Hour) {
             if (sunrise.hour > 12) {
                 sunriseHour = (hours - 12).abs();
@@ -503,9 +530,9 @@ if (seconds%2 == 0){if (sensorIter != null) {
         }
         
 
-        var sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
+    var sunset = Time.Gregorian.info(Toybox.Weather.getSunset(positions, timeStamp), Time.FORMAT_MEDIUM);
         
-		 var sunsetHour = sunset.hour;
+	var sunsetHour = sunset.hour;
          if (!System.getDeviceSettings().is24Hour) {
             if (sunset.hour > 12) {
                 sunsetHour = (hours - 12).abs();
@@ -517,44 +544,44 @@ if (seconds%2 == 0){if (sensorIter != null) {
             }
         }
 
- var AMPM = "";       
-if (!System.getDeviceSettings().is24Hour) {
+    var AMPM = "";       
+    if (!System.getDeviceSettings().is24Hour) {
         if (clockTime.hour > 12) {
                 AMPM = "PM";
             }else{
                 AMPM = "AM";
             }}
 
-var phoneI="";
-var chargeI = "";
-if (phonestatus == true){phoneI = "Y";}
-else{phoneI = "N";}
-if (batterycharging == true){chargeI = "Y";}
-else{chargeI = "N";}
-var TempMetric = System.getDeviceSettings().temperatureUnits;
+    var phoneI="";
+    var chargeI = "";
+    if (phonestatus == true){phoneI = "Y";}
+    else{phoneI = "N";}
+    if (batterycharging == true){chargeI = "Y";}
+    else{chargeI = "N";}
+    var TempMetric = System.getDeviceSettings().temperatureUnits;
 
-var TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
-var FC = "C";
-var cond = Toybox.Weather.getCurrentConditions().condition;
+    var TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
+    var FC = "C";
+    var cond = Toybox.Weather.getCurrentConditions().condition;
 
-if (TempMetric == System.UNIT_METRIC){
-TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
-FC = "C";
-}else{
-TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
-FC = "F";   
-}
+    if (TempMetric == System.UNIT_METRIC){
+    TEMP = Toybox.Weather.getCurrentConditions().feelsLikeTemperature;
+    FC = "C";
+    }else{
+    TEMP = ((((((Toybox.Weather.getCurrentConditions().feelsLikeTemperature).toDouble())*9)/5)+32).toNumber()); 
+    FC = "F";   
+    }
 
 
-var monthString = Lang.format(
+    var monthString = Lang.format(
     "$1$",
-[
-today.month
-]);
+    [
+    today.month
+    ]);
 
-var horoscopeYear = getChineseYear(today.year);
-var horoscopeBirth =getChineseYear(birthEntry);
-var monthZodiac = getHoroscope(4, 25);
+    var horoscopeYear = getChineseYear(today.year);
+    var horoscopeBirth =getChineseYear(birthEntry);
+    var monthZodiac = getHoroscope(4, 25);
 
 
 
@@ -569,10 +596,10 @@ var monthZodiac = getHoroscope(4, 25);
 //System.println(myStats.totalMemory);
 //System.println(myStats.usedMemory);
 //System.println(myStats.freeMemory);
+//----------PRINT TO SYSTEM CHECKS ------------------------------------        
         
         
-        
-    // Update the view of text
+    // Variables of text From Layout-------------------------------------------
         var timeText = View.findDrawableById("TimeLabel") as Text;
         var dateText = View.findDrawableById("DateLabel") as Text;
         var batteryText = View.findDrawableById("batteryLabel") as Text;
@@ -584,8 +611,18 @@ var monthZodiac = getHoroscope(4, 25);
         var sunsetText = View.findDrawableById("sunsetLabel") as Text;
         var temperatureText = View.findDrawableById("tempLabel") as Text;
         var connectText = View.findDrawableById("connectLabel") as Text;
-        //set text message
         
+    // Variables for Data END-------------------------------------------
+/*
+          _     _           _   
+  ___ ___| |_  | |_ _____ _| |_ 
+ (_-</ -_)  _| |  _/ -_) \ /  _|
+ /__/\___|\__|  \__\___/_\_\\__|
+                                
+Set Text Values from Data Variables 
+
+*/
+//---------------------------TEXT---------------------------------------------
         sunriseText.setText(sunriseHour + ":" + sunrise.min.format("%02u")+"AM");
         sunsetText.setText(sunsetHour + ":" + sunset.min.format("%02u")+"PM");
         temperatureText.setText("  "+cond +" "+ TEMP + "°" + FC);
@@ -600,12 +637,23 @@ var monthZodiac = getHoroscope(4, 25);
         calorieText.setText(""+calories);
         horoscopeText.setText(genderEntry + " "+ horoscopeYear + " "+ horoscopeBirth + " " + monthZodiac);
         connectText.setText(phoneI+" "+chargeI);
-        
+       //---------------------------TEXT--------------------------------------------- 
       
         View.onUpdate(dc);
         
-          
+/*
+     _                   _    _ _                      
+  __| |_ _ __ ___ __ __ | |__(_) |_ _ __  __ _ _ __ ___
+ / _` | '_/ _` \ V  V / | '_ \ |  _| '  \/ _` | '_ (_-<
+ \__,_|_| \__,_|\_/\_/  |_.__/_|\__|_|_|_\__,_| .__/__/
+                                              |_|      
+  Star Pet has different forms that Change based on Data                                            
+  Star Moves up and Down and Changes Face every second
+*/ 
+
+
          var fakesteps = info.steps; 
+         //Fake Stes can be replaced with your own values to test
         if (fakesteps < goal/4){ egg.draw(dc);  }
         else if (fakesteps > (goal/4) && fakesteps < ((goal*2)/4)){ baby.draw(dc);  goal1.draw(dc);}
         else if (fakesteps > ((goal*2)/4) && fakesteps < ((goal*3)/4)){ star.draw(dc);  goal2.draw(dc);}
@@ -656,9 +704,19 @@ var monthZodiac = getHoroscope(4, 25);
            specialstar.locY =venumovey;
             
         }
-moon1.draw(dc);
-risepic.draw(dc);
-setpic.draw(dc);
+        //Draw Moon Phase
+        moon1.draw(dc);
+        //These Rise/Set could Be Icons, but I chose Bitmaps
+        risepic.draw(dc);
+        setpic.draw(dc);
+/*
+              _                 _      _       
+  ___ _ _  __| |  _  _ _ __  __| |__ _| |_ ___ 
+ / -_) ' \/ _` | | || | '_ \/ _` / _` |  _/ -_)
+ \___|_||_\__,_|  \_,_| .__/\__,_\__,_|\__\___|
+                      |_|                      
+*/
+
  }
 
    
@@ -669,6 +727,41 @@ setpic.draw(dc);
     function onHide() as Void {
     }
 
+  /*
+     _    _                    _                                     
+  __| |_ (_)_ _  ___ ___ ___  | |_  ___ _ _ ___ ___ __ ___ _ __  ___ 
+ / _| ' \| | ' \/ -_|_-</ -_) | ' \/ _ \ '_/ _ (_-</ _/ _ \ '_ \/ -_)
+ \__|_||_|_|_||_\___/__/\___| |_||_\___/_| \___/__/\__\___/ .__/\___|
+                                                          |_|        
+  */  
+
+//Takes in Year % 12 and Gives A Rough Chinese Horoscope
+//Not Totally Accurate if Month falls in January or February
+//Look at the 2022-2030 Function below to see inaccuracies 
+
+//You Could Use Ranges of DaysSinceEpoch To Make Accurate
+//But I Took the lazy Route to save memory using a case switch
+
+/* Also Here is a unused Happy Chinese New Year Message Function:  
+if (month == 1 && day == 1 && year == 2022) {
+        return "Happy Lunar New Year!";
+      } else if (month == 0 && day == 22 && year == 2023) {
+        return "Happy Lunar New Year!";
+      } else if (month == 1 && day == 10 && year == 2024) {
+        return "Happy Lunar New Year!";
+      } else if (month == 0 && day == 29 && year == 2025) {
+        return "Happy Lunar New Year!";
+      } else if (month == 1 && day == 17 && year == 2026) {
+        return "Happy Lunar New Year!";
+      } else if (month == 1 && day == 7 && year == 2027) {
+        return "Happy Lunar New Year!";
+      } else if (month == 0 && day == 26 && year == 2028) {
+        return "Happy Lunar New Year!";
+      } else if (month == 1 && day == 13 && year == 2029) {
+        return "Happy Lunar New Year!";
+      } else if (month == 1 && day == 2 && year == 2030) {
+        return "Happy Lunar New Year!";
+*/
 function getChineseYear(year){
     var value = ((((year).toNumber())%12).toNumber());
         switch(value){
@@ -712,7 +805,13 @@ function getChineseYear(year){
             return "dra";
             }
     }
-
+/*
+  __  __                 ___ _                 
+ |  \/  |___  ___ _ _   | _ \ |_  __ _ ___ ___ 
+ | |\/| / _ \/ _ \ ' \  |  _/ ' \/ _` (_-</ -_)
+ |_|  |_\___/\___/_||_| |_| |_||_\__,_/__/\___|
+                                               
+*/
 function getMoonPhase(year, month, day) {
 
       var c = 0;
@@ -747,6 +846,13 @@ function getMoonPhase(year, month, day) {
 
       return b;
     }
+/*
+  ____        _ _           __  __         _   _    
+ |_  /___  __| (_)__ _ __  |  \/  |___ _ _| |_| |_  
+  / // _ \/ _` | / _` / _| | |\/| / _ \ ' \  _| ' \ 
+ /___\___/\__,_|_\__,_\__| |_|  |_\___/_||_\__|_||_|
+                                                    
+*/
 
 function getHoroscope(month, day) {
 
@@ -822,7 +928,13 @@ function getHoroscope(month, day) {
         return "Ari";
       }
     }
-
+/*
+  _  _              _     ___      _       
+ | || |___ __ _ _ _| |_  | _ \__ _| |_ ___ 
+ | __ / -_) _` | '_|  _| |   / _` |  _/ -_)
+ |_||_\___\__,_|_|  \__| |_|_\__,_|\__\___|
+                                           
+*/
 function getIterator() {
     // Check device for SensorHistory compatibility
     if ((Toybox has :SensorHistory) && (Toybox.SensorHistory has :getHeartRateHistory)) {
