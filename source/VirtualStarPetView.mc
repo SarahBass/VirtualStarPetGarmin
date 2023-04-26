@@ -471,19 +471,18 @@ today.day_of_week
         }
 
     }
-
+/*
+  _                    _   
+ | |__ _ _  _ ___ _  _| |_ 
+ | / _` | || / _ \ || |  _|
+ |_\__,_|\_, \___/\_,_|\__|
+         |__/              
+*/
     // Load your string resources here from Layout
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.WatchFace(dc));
-        
-    }
+        setLayout(Rez.Layouts.WatchFace(dc)); }
 
-    //Foreground View as blank for energy save
-    //and to not burn screen
-    function onShow() as Void {
-        
 
-    }
 /*
                 _      _             _            
   _  _ _ __  __| |__ _| |_ ___  __ _(_)_____ __ __
@@ -764,13 +763,6 @@ Set Text Values from Data Variables
 
  }
 
-   
-
-    // Called when this View is removed from the screen. Save the
-    // state of this View here. This includes freeing resources from
-    // memory.
-    function onHide() as Void {
-    }
 
   /*
      _    _                    _                                     
@@ -998,13 +990,29 @@ function getIterator() {
     return null;
 }
 
+/*
+   ___                _       __   __   _    _  
+  / __|__ _ _ _ _ __ (_)_ _   \ \ / /__(_)__| | 
+ | (_ / _` | '_| '  \| | ' \   \ V / _ \ / _` | 
+  \___\__,_|_| |_|_|_|_|_||_|   \_/\___/_\__,_| 
+                                                
+*/
+
     // The user has just looked at their watch. Timers and animations may be started here.
-    function onExitSleep() as Void {
-    }
+    function onExitSleep() as Void { }
 
     // Terminate any active timers and prepare for slow updates.
     function onEnterSleep() as Void {
     }
+
+    //Foreground View as blank for energy save
+    //and to not burn screen
+    function onShow() as Void { }
+
+    // Called when this View is removed from the screen. Save the
+    // state of this View here. This includes freeing resources from
+    // memory.
+    function onHide() as Void { }
 
 }
  
