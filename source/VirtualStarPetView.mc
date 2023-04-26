@@ -26,6 +26,7 @@ class VirtualStarPetView extends WatchUi.WatchFace {
     var sensorIter = getIterator();
     var venus2X = LAYOUT_HALIGN_RIGHT;
     var venus2Y = LAYOUT_VALIGN_CENTER;
+    var venus2XL = 20;
     var venumovey =  116;
   
     //Somehow get venumovey to move up 3 pixels    
@@ -45,6 +46,7 @@ class VirtualStarPetView extends WatchUi.WatchFace {
       var mouth2;
       var mouth3;
       var mouth4;
+      var moon1;
     function initialize() {
     
 
@@ -119,8 +121,80 @@ today.day_of_week
              :locX=> venus2X,
             :locY=> venus2Y
         });
-         
+  // 0 => New Moon
+  // 1 => Waxing Crescent Moon
+  // 2 => Quarter Moon
+  // 3 => Waxing Gibbous Moon
+  // 4 => Full Moon
+  // 5 => Waning Gibbous Moon
+  // 6 => Last Quarter Moon
+  // 7 => Waning Crescent Moon
+  var moonnumber = getMoonPhase(2023, 3, 25);
 
+ // var moonnumber = getMoonPhase(today.year, today.month, today.day);
+
+  switch (moonnumber){
+           case 0:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.newmoon,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+            case 1:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.waxcres,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        }); 
+           case 2:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.firstquar,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+           case 3:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.waxgib,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+            case 4:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.full,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+           case 5:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.wangib,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+           case 6:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.thirdquar,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+           case 7:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.wancres,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });
+        break;
+        default:  
+            moon1 = new WatchUi.Bitmap({
+            :rezId=>Rez.Drawables.full,
+            :locX=> venus2XL,
+            :locY=> venus2Y
+        });}
         switch(fulldateString){
            case "Dec 25":  
             specialstar = new WatchUi.Bitmap({
@@ -391,7 +465,7 @@ if (seconds%2 == 0){if (sensorIter != null) {
         
 		var positions = Activity.Info.currentLocation;
         if (positions == null){
-        positions=new Position.Location(
+        positions=new Position.Location( 
     {
         :latitude => 33.684566,
         :longitude => -117.826508,
@@ -465,7 +539,7 @@ today.month
 
 var horoscopeYear = getChineseYear(today.year);
 var horoscopeBirth =getChineseYear(birthEntry);
-var monthZodiac = getHoroscope((monthString) , (today.day));
+var monthZodiac = getHoroscope(4, 25);
 
 
 
@@ -567,7 +641,7 @@ var monthZodiac = getHoroscope((monthString) , (today.day));
            specialstar.locY =venumovey;
             
         }
-
+moon1.draw(dc);
 
  }
 
@@ -623,81 +697,113 @@ function getChineseYear(year){
             }
     }
 
+function getMoonPhase(year, month, day) {
 
+      var c = 0;
+      var e = 0;
+      var jd = 0;
+      var b = 0;
+
+      if (month < 3) {
+        year--;
+        month += 12;
+      }
+
+      ++month;
+
+      c = 365.25 * year;
+
+      e = 30.6 * month;
+
+      jd = c + e + day - 694039.09; //jd is total days elapsed
+
+      jd /= 29.5305882; //divide by the moon cycle
+
+      b = (jd).toNumber(); //int(jd) -> b, take integer part of jd
+
+      jd -= b; //subtract integer part to leave fractional part of original jd
+
+      b = Math.round(jd * 8); //scale fraction from 0-8 and round
+
+      if (b >= 8) {
+        b = 0; //0 and 8 are the same so turn 8 into 0
+      }
+
+      return b;
+    }
 
 function getHoroscope(month, day) {
-    month = month.toString();
-    day = day.toNumber();
-      if (month == "Jan") {
-        if ((day > 0) && (day < 19)) {
-          return "Capricorn";
+
+     if (month == 0) {
+        if (day > 0 && day < 19) {
+          return "Cap";
         } else {
-          return "Aquarius";
+          return "Aqu";
         }
-      } else if (month == "Feb") {
+      } else if (month == 1) {
         if (day > 1 && day < 18) {
-          return "Capricorn";
+          return "Cap";
         } else {
-          return "Pisces";
+          return "Pis";
         }
-      } else if (month == "Mar") {
+      } else if (month == 2) {
         if (day > 1 && day < 20) {
-          return "Pisces";
+          return "Pis";
         } else {
-          return "Aries";
+          return "Ari";
         }
-      } else if (month == "Apr") {
-        if ((day > 1) && (day < 19)) {
-          return "Aries";
+      } else if (month == 3) {
+        if (day > 1 && day < 19) {
+          return "Ari";
         } else {
-          return "Taurus";
+          return "Tau";
         }
-      } else if (month == "May") {
-        return "Taurus";
-      } else if (month == "Jun") {
+      } else if (month == 4) {
+        return "Tau";
+      } else if (month == 5) {
         if (day > 1 && day < 20) {
-          return "Gemini";
+          return "Gem";
         } else {
-          return "Cancer";
+          return "Can";
         }
-      } else if (month == "Jul") {
+      } else if (month == 6) {
         if (day > 1 && day < 22) {
-          return "Cancer";
+          return "Can";
         } else {
           return "Leo";
         }
-      } else if (month == "Aug") {
+      } else if (month == 7) {
         if (day > 1 && day < 22) {
           return "Leo";
         } else {
-          return "Virgo";
+          return "Vir";
         }
-      } else if (month == "Sep") {
+      } else if (month == 8) {
         if (day > 1 && day < 22) {
-          return "Virgo";
+          return "Vir";
         } else {
-          return "Libra";
+          return "Lib";
         }
-      } else if (month == "Oct") {
+      } else if (month == 9) {
         if (day > 1 && day < 22) {
-          return "Libra";
+          return "Lib";
         } else {
-          return "Scorpio";
+          return "Sco";
         }
-      } else if (month == "Nov") {
+      } else if (month == 10) {
         if (day > 1 && day < 21) {
-          return "Scorpio";
+          return "Sco";
         } else {
-          return "Sagittarius";
+          return "Sag";
         }
-      } else if (month == "Dec") {
+      } else if (month == 11) {
         if (day > 1 && day < 21) {
-          return "Sagittarius";
+          return "Sag";
         } else {
-          return "Capricorn";
+          return "Cap";
         }
       } else {
-        return "Aries";
+        return "Ari";
       }
     }
 
