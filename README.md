@@ -1,5 +1,7 @@
 # VirtualStarPetGarmin
-No Backgrounds Version to save energy - Work in progress
+No Backgrounds Version to save energy - 
+
+ Garmin Connect IQ Store https://apps.garmin.com/en-US/apps/ff998f86-57f9-4f85-9bf6-ce15a613c6b4
 
 ![alt text](https://github.com/SarahBass/VirtualStarPetGarmin/blob/main/Largest%20garmin%203.png)
 
